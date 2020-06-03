@@ -43,7 +43,8 @@ export default {
   },
   computed: {
     menu () {
-      if (this.userRole !== '0') {
+      // eslint-disable-next-line eqeqeq
+      if (this.userRole != 0) {
         return this.navList.filter(n => !n.name.endsWith('user') && !n.name.endsWith('count'))
       } else {
         return this.navList

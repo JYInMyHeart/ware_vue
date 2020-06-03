@@ -238,7 +238,8 @@ export default {
   },
   computed: {
     operationVisible () {
-      return this.userRole === '0'
+      // eslint-disable-next-line eqeqeq
+      return this.userRole == 0
     },
     ...mapState(['Authorization', 'userRole'])
   },
