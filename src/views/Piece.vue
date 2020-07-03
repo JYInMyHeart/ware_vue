@@ -279,9 +279,6 @@ export default {
     handleEdit () {
       this.formData.supplier_name = this.supplierGroupIds.join(',')
       this.formData.dealer_name = this.dealerGroupIds.join(',')
-      if (this.formData.run_date != null) {
-        this.formData.run_date = this.formData.run_date.Format('yyyy-MM-dd hh:mm:ss')
-      }
       // 发送请求，提交表单数据
       this.$axios.post('/piece/web/update', this.formData,
         { headers: { Authorization: this.Authorization } }
