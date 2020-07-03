@@ -53,7 +53,7 @@
                   <el-row>
                     <el-col :span="12">
                       <el-form-item label="性别">
-                        <el-select v-model="formData.gender" placeholder="请选择">
+                        <el-select v-model="formData.gender" placeholder="请选择" @change="refresh()">
                           <el-option
                             v-for="item in genderList"
                             :key="item.value"
@@ -131,7 +131,9 @@ export default {
     this.init()
   },
   methods: {
-
+    refresh () {
+      this.$forceUpdate()
+    },
     // 弹出编辑窗口
     init () {
       // 发送请求，根据ID获取用户数据

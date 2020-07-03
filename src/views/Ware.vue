@@ -23,7 +23,7 @@
           <el-table-column prop="area" label="面积" align="center"></el-table-column>
           <el-table-column prop="ware_type" label="仓库类型" align="center">
             <template slot-scope="scope">
-              <span>{{wareTypeMap.get(scope.row.ware_type)}}</span>
+              <span>{{ wareTypeMap.get(scope.row.ware_type) }}</span>
             </template>
           </el-table-column>
           <el-table-column prop="run_date" label="运营时间" align="center"></el-table-column>
@@ -72,7 +72,7 @@
                     <el-row>
                       <el-col :span="12">
                         <el-form-item label="仓库类型">
-                          <el-select v-model="formData.ware_type">
+                          <el-select v-model="formData.ware_type" @change="refresh()" >
                             <el-option
                               v-for="item in wareTypeList"
                               :key="item.value"
@@ -152,7 +152,7 @@
                     <el-row>
                       <el-col :span="12">
                         <el-form-item label="仓库类型">
-                          <el-select v-model="formData.ware_type">
+                          <el-select v-model="formData.ware_type" @change="refresh()">
                             <el-option
                               v-for="item in wareTypeList"
                               :key="item.value"
@@ -196,6 +196,7 @@
 <script>
 import { mapState } from 'vuex'
 import '@/dateFormat'
+
 export default {
   name: 'Ware',
   data () {
@@ -348,6 +349,9 @@ export default {
       })
     },
 
+    refresh () {
+      this.$forceUpdate()
+    },
     // 编辑
     handleEdit () {
       console.log(this.formData)

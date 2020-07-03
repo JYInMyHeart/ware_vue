@@ -101,7 +101,7 @@
                     <el-row>
                       <el-col :span="12">
                         <el-form-item label="仓库">
-                          <el-select v-model="formData.ware_name" placeholder="请选择">
+                          <el-select v-model="formData.ware_name" placeholder="请选择" @change="refresh()">
                             <el-option
                               v-for="item in wareData"
                               :key="item.name"
@@ -161,7 +161,7 @@
                       </el-col>
                       <el-col :span="12">
                         <el-form-item label="仓库">
-                          <el-select v-model="formData.ware_name" placeholder="请选择">
+                          <el-select v-model="formData.ware_name" placeholder="请选择" @change="refresh()">
                             <el-option
                               v-for="item in wareData"
                               :key="item.name"
@@ -272,7 +272,9 @@ export default {
     this.findPage()
   },
   methods: {
-
+    refresh () {
+      this.$forceUpdate()
+    },
     // 编辑
     handleEdit () {
       this.formData.supplier_name = this.supplierGroupIds.join(',')

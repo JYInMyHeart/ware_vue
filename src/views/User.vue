@@ -84,13 +84,13 @@
                     <el-row>
                       <el-col :span="12">
                         <el-form-item label="出生日期">
-                          <el-date-picker type="date" placeholder="选择日期" v-model="formData.birthDate"
+                          <el-date-picker type="date" placeholder="选择日期" v-model="formData.time" @change="refresh()"
                                           style="width: 100%;"></el-date-picker>
                         </el-form-item>
                       </el-col>
                       <el-col :span="12">
                         <el-form-item label="性别">
-                          <el-select v-model="formData.gender" placeholder="请选择">
+                          <el-select v-model="formData.gender" placeholder="请选择" @change="refresh()">
                             <el-option
                               v-for="item in genderList"
                               :key="item.value"
@@ -109,7 +109,7 @@
                       </el-col>
                       <el-col :span="12">
                         <el-form-item label="权限">
-                          <el-select v-model="formData.authority" placeholder="请选择">
+                          <el-select v-model="formData.authority" placeholder="请选择" @change="refresh()">
                             <el-option
                               v-for="item in userRoleList"
                               :key="item.value"
@@ -153,7 +153,7 @@
                       </el-col>
                       <el-col :span="12">
                         <el-form-item label="权限">
-                          <el-select v-model="formData.authority" placeholder="请选择">
+                          <el-select v-model="formData.authority" placeholder="请选择" @change="refresh()">
                             <el-option
                               v-for="item in userRoleList"
                               :key="item.value"
@@ -167,13 +167,13 @@
                     <el-row>
                       <el-col :span="12">
                         <el-form-item label="出生日期">
-                          <el-date-picker type="date" placeholder="选择日期" v-model="formData.birthDate"
+                          <el-date-picker type="date" placeholder="选择日期" v-model="formData.time" @change="refresh()"
                                           style="width: 100%;"></el-date-picker>
                         </el-form-item>
                       </el-col>
                       <el-col :span="12">
                         <el-form-item label="性别">
-                          <el-select v-model="formData.gender" placeholder="请选择">
+                          <el-select v-model="formData.gender" placeholder="请选择" @change="refresh()">
                             <el-option
                               v-for="item in genderList"
                               :key="item.value"
@@ -244,7 +244,7 @@
 
 <script>
 import { mapState } from 'vuex'
-
+import '@/dateFormat'
 export default {
   name: 'User',
   data () {
@@ -289,6 +289,9 @@ export default {
     this.findPage()
   },
   methods: {
+    refresh () {
+      this.$forceUpdate()
+    },
     // 编辑
     handleEdit () {
       // 发送请求，提交表单数据
@@ -308,6 +311,7 @@ export default {
     // 添加
     handleAdd () {
       console.log(this.formData)
+      this.formData.time = this.formData.time.Format('yyyy-MM-dd hh:mm:ss')
       this.$axios.post('/user/web/register', this.formData,
         {
           headers: {
